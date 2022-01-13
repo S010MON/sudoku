@@ -2,20 +2,19 @@ import numpy as np
 from state import State
 
 
-def generate_empty_state():
-    A = np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0]])
-    return State(A)
+def generate_empty_state() -> State:
+    return State(np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 0, 0, 0, 0, 0, 0]]))
 
 
-def generate_valid_state():
+def generate_valid_state() -> State:
     A = np.array([[1, 4, 7, 2, 5, 8, 3, 6, 9],
                   [2, 5, 0, 3, 6, 0, 4, 7, 1],
                   [3, 6, 9, 4, 7, 1, 5, 8, 2],
@@ -28,7 +27,7 @@ def generate_valid_state():
     return State(A)
 
 
-def generate_invalid_row_state():
+def generate_invalid_row_state() -> State:
     A = np.array([[1, 1, 7, 2, 5, 8, 3, 6, 9],
                   [2, 2, 0, 3, 6, 0, 4, 7, 1],
                   [3, 3, 9, 4, 7, 1, 5, 8, 2],
@@ -41,7 +40,7 @@ def generate_invalid_row_state():
     return State(A)
 
 
-def generate_invalid_col_state():
+def generate_invalid_col_state() -> State:
     A = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9],
                   [1, 2, 3, 4, 5, 6, 7, 8, 9],
                   [3, 6, 9, 4, 7, 1, 5, 8, 2],
@@ -54,7 +53,7 @@ def generate_invalid_col_state():
     return State(A)
 
 
-def generate_invalid_box_state():
+def generate_invalid_box_state() -> State:
     A = np.array([[1, 0, 0, 4, 0, 0, 7, 0, 0],
                   [0, 1, 0, 0, 4, 0, 0, 7, 0],
                   [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -67,7 +66,7 @@ def generate_invalid_box_state():
     return State(A)
 
 
-def generate_complete_state():
+def generate_complete_state() -> State:
     A = np.array([[1, 4, 7, 2, 5, 8, 3, 6, 9],
                   [2, 5, 8, 3, 6, 9, 4, 7, 1],
                   [3, 6, 9, 4, 7, 1, 5, 8, 2],
