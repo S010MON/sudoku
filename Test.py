@@ -78,6 +78,42 @@ class TestState(unittest.TestCase):
         for i in range(1, 9):
             self.assertFalse(b.check_square(i))
 
+    def test_row_possibilities(self):
+        b = stateFactory.generate_possibilities_test()
+        exp = [3, 4, 5, 6, 7, 8, 9]
+        act = b.possible_numbers_in_row(0)
+        self.assertEqual(exp, act)
+
+    def test_get_possibilities_all(self):
+        b = stateFactory.generate_empty_state()
+        exp = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        act = b.get_possibilities(1, 1)
+        self.assertEqual(exp, act)
+
+    def test_get_possibilities_none(self):
+        b = stateFactory.generate_complete_state()
+        exp = []
+        act = b.get_possibilities(1, 1)
+        self.assertEqual(exp, act)
+
+    def test_get_possibilities_one(self):
+        b = stateFactory.generate_possibilities_test()
+        exp = [3, 5, 6, 7, 8, 9]
+        act = b.get_possibilities(0, 0)
+        self.assertEqual(exp, act)
+
+    def test_lookup_square(self):
+        b = stateFactory.generate_empty_state()
+        exp = 1
+        act = b.look_up_square(2, 2)
+        self.assertEqual(exp, act)
+
+    def test_lookup_square_zero(self):
+        b = stateFactory.generate_empty_state()
+        exp = 1
+        act = b.look_up_square(0, 0)
+        self.assertEqual(exp, act)
+
 if __name__ == '__main__':
     unittest.main()
 

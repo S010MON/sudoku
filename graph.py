@@ -22,4 +22,5 @@ class Graph:
         nodes = []
         for row in range(initial_state.rows):
             for col in range(initial_state.cols):
-
+                possibilities = initial_state.get_possibilities(row, col)
+                nodes.append(Node(possibilities))

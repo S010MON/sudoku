@@ -28,42 +28,65 @@ class State:
         return True
 
     def check_row(self, row) -> bool:
-        L = []
+        lst = []
         for col in range(self.cols):
             if self.board[row][col] != 0:
-                L.append(self.board[row][col])
-        return not has_duplicate(L)
+                lst.append(self.board[row][col])
+        return not has_duplicate(lst)
 
     def check_col(self, col) -> bool:
-        L = []
+        lst = []
         for row in range(self.rows):
             if self.board[row][col] != 0:
-                L.append(self.board[row][col])
-        return not has_duplicate(L)
+                lst.append(self.board[row][col])
+        return not has_duplicate(lst)
 
     def check_square(self, square) -> bool:
-        L = []
+        lst = []
         sq = self.box_coord[square]
         row_start = sq[0]
         col_start = sq[1]
         for row in range(row_start, row_start + 2):
             for col in range(col_start, col_start + 2):
                 if self.board[row][col] != 0:
-                    L.append(self.board[row][col])
-        return not has_duplicate(L)
+                    lst.append(self.board[row][col])
+        return not has_duplicate(lst)
 
-    def remaining_numbers_in_row(self, row) -> list:
-        L = []
+    def get_possibilities(self, row, col) -> list:
+        poss_row = self.possible_numbers_in_row(row)
+        poss_col = self.possible_numbers_in_col(col)
+        poss_box = self.possible_number_in_square(self.look_up_square(row, col))
+
+        lst = []
+        for i in range(1, 10):
+            if i in poss_box and i in poss_col and i in poss_row:
+                lst.append(i)
+        return lst
+
+    def possible_numbers_in_row(self, row) -> list:
+        lst = []
         for col in range(self.cols):
             if self.board[row][col] != 0:
-                L.append(self.board[row][col])
-        return L
+                lst.append(self.board[row][col])
+        return get_missing(lst)
 
-    def remaining_numbers_in_col(self, col):
-        pass
+    def possible_numbers_in_col(self, col) -> list:
+        lst = []
+        for row in range(self.rows):
+            if self.board[row][col] != 0:
+                lst.append(self.board[row][col])
+        return get_missing(lst)
 
-    def remaining_number_in_square(self, square):
-        pass
+    def possible_number_in_square(self, square) -> list:
+        lst = []
+        sq = self.box_coord[square]
+        row_start = sq[0]
+        col_start = sq[1]
+        for row in range(row_start, row_start + 2):
+            for col in range(col_start, col_start + 2):
+                if self.board[row][col] != 0:
+                    lst.append(self.board[row][col])
+        return get_missing(lst)
 
     def __str__(self) -> str:
         s = ''
@@ -78,6 +101,12 @@ class State:
                 s += ' ' + str(self.board[row][col]) + ' '
             s += '\n'
         return s
+
+    def look_up_square(self, row, col) -> int:
+        for i in range(1, 9):
+            box = self.box_coord[i]
+            if box[0] <= row < box[0] + 4 and box[1] <= col < box[1] + 4:
+                return i
 
 
 def has_duplicate(lst) -> bool:
