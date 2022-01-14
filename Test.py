@@ -114,6 +114,7 @@ class TestState(unittest.TestCase):
         act = b.look_up_square(0, 0)
         self.assertEqual(exp, act)
 
+
 if __name__ == '__main__':
     unittest.main()
 

@@ -98,7 +98,10 @@ class State:
             for col in range(self.cols):
                 if col == 3 or col == 6:
                     s += '|'
-                s += ' ' + str(self.board[row][col]) + ' '
+                if self.board[row][col] == 0:
+                    s += '   '
+                else:
+                    s += ' ' + str(self.board[row][col]) + ' '
             s += '\n'
         return s
 
