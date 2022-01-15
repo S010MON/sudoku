@@ -66,53 +66,60 @@ class TestState(unittest.TestCase):
     def test_valid_box_empty(self):
         b = stateFactory.generate_empty_state()
         for i in range(1, 9):
-            self.assertTrue(b.check_square(i))
+            self.assertTrue(b.check_box(i))
 
     def test_valid_box_true(self):
         b = stateFactory.generate_valid_state()
         for i in range(1, 9):
-            self.assertTrue(b.check_square(i))
+            self.assertTrue(b.check_box(i))
 
     def test_valid_box_neg(self):
         b = stateFactory.generate_invalid_box_state()
         for i in range(1, 9):
-            self.assertFalse(b.check_square(i))
+            self.assertFalse(b.check_box(i))
 
-    def test_row_possibilities(self):
-        b = stateFactory.generate_possibilities_test()
-        exp = [3, 4, 5, 6, 7, 8, 9]
-        act = b.possible_numbers_in_row(0)
-        self.assertEqual(exp, act)
-
-    def test_get_possibilities_all(self):
+    def test_is_legal_empty(self):
         b = stateFactory.generate_empty_state()
-        exp = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        act = b.get_possibilities(1, 1)
-        self.assertEqual(exp, act)
+        self.assertTrue(b.is_legal())
 
-    def test_get_possibilities_none(self):
+    def test_is_legal_complete(self):
         b = stateFactory.generate_complete_state()
-        exp = []
-        act = b.get_possibilities(1, 1)
-        self.assertEqual(exp, act)
+        self.assertTrue(b.is_legal())
 
-    def test_get_possibilities_one(self):
-        b = stateFactory.generate_possibilities_test()
-        exp = [3, 5, 6, 7, 8, 9]
-        act = b.get_possibilities(0, 0)
-        self.assertEqual(exp, act)
+    def test_is_legal_invalid_box(self):
+        b = stateFactory.generate_invalid_box_state()
+        self.assertFalse(b.is_legal())
 
-    def test_lookup_square(self):
+    def test_is_legal_invalid_row(self):
+        b = stateFactory.generate_invalid_row_state()
+        self.assertFalse(b.is_legal())
+
+    def test_is_legal_invalid_col(self):
+        b = stateFactory.generate_invalid_col_state()
+        self.assertFalse(b.is_legal())
+
+    def test_lookup_box(self):
         b = stateFactory.generate_empty_state()
         exp = 1
-        act = b.look_up_square(2, 2)
+        act = b.look_up_box(2, 2)
         self.assertEqual(exp, act)
 
-    def test_lookup_square_zero(self):
+    def test_lookup_box_zero(self):
         b = stateFactory.generate_empty_state()
         exp = 1
-        act = b.look_up_square(0, 0)
+        act = b.look_up_box(0, 0)
         self.assertEqual(exp, act)
+
+    def test_copy(self):
+        a = stateFactory.generate_empty_state()
+        b = a.copy()
+        self.assertNotEqual(a, b)
+
+    def test_set(self):
+        a = stateFactory.generate_empty_state()
+        self.assertEqual(0, a.get(1, 1))
+        a.set(1, 1, 1)
+        self.assertEqual(1, a.get(1, 1))
 
 
 if __name__ == '__main__':
