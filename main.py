@@ -4,14 +4,12 @@ from state import State
 
 def depth_first_search(state: State) -> State:
 
-    print(state)
-
     if not state.is_legal():
         return None
 
     # Base case -> if we find the goal
     if state.is_complete():
-        return State
+        return state
 
     stack = []
     # Check through all rows and columns
@@ -28,13 +26,16 @@ def depth_first_search(state: State) -> State:
                     stack.append(copy)
 
     while len(stack) > 0:
-        result = depth_first_search(stack.pop())
-        if result is not None and result.is_complete():
-            return result
+        current_state = stack.pop()
+        result = depth_first_search(current_state)
+        if result is not None:
+            if result.is_complete():
+                return result
 
     return None
 
 
 if __name__ == "__main__":
     state = stateFactory.generate_valid_state()
-    print(depth_first_search(state))
+    output = depth_first_search(state)
+    print(output)
