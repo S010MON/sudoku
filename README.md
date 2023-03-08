@@ -4,3 +4,7 @@
 A simple terminal based Sudoku solver that uses a Depth First Search to return the solved puzzle, or returns nothing if the goal state cannot be found.
 
 ![screenshot_img.png](https://github.com/S010MON/sudoku/blob/master/Sudoku_img.png)
+
+
+# Neural Net Data
+Download from: https://www.kaggle.com/datasets/bryanpark/sudoku?resource=download
