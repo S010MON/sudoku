@@ -1,8 +1,11 @@
 import numpy as np
 import tensorflow as tf
 
+import stateFactory
+
+
 def one_hot_encode(state: np.ndarray) -> np.ndarray:
-    return (np.arange(state.max()) == state[..., None]-1).astype(int).reshape((81,9))
+    return (np.arange(state.max()) == state[..., None]-1).astype(int).reshape((81, 9))
 
 def get_max_index(arr):
     max_indices = np.argmax(arr, axis=0)
@@ -28,3 +31,10 @@ def create_model():
     model.add(tf.keras.layers.Conv2D(1, kernel_size=(3, 3), activation='relu', padding='same'))
 
     return model
+
+def decode_output(sud):
+    """
+    Decode a sudoku with the shape 81x9 (from the one_hot_encoding()) into a readable 9x9 sudoku board.
+    """
+    sudoku_decoded = np.argmax(sud, axis=1).reshape((9, 9)) + 1
+    return sudoku_decoded
