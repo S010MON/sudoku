@@ -1,7 +1,11 @@
 import unittest
-import state
-import stateFactory
 
+import numpy as np
+
+import state
+from state import State
+import stateFactory
+import nn_utils
 
 class TestState(unittest.TestCase):
 
@@ -121,6 +125,14 @@ class TestState(unittest.TestCase):
         a.set(1, 1, 1)
         self.assertEqual(1, a.get(1, 1))
 
+    def test_decoding(self):
+        a = stateFactory.generate_complete_state()
+        enc = nn_utils.one_hot_encode(a.board)  # Encoded board
+        dec = nn_utils.decode_output(enc)  # Decoded board
+        b = State(dec)
+        for i in range(len(a.board)):
+            for j in range(len(a.board[0])):
+                self.assertEqual(a.board[i, j], b.board[i, j])  # Compare each index
 
 if __name__ == '__main__':
     unittest.main()
