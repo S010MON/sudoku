@@ -134,6 +134,7 @@ class TestState(unittest.TestCase):
             for j in range(len(a.board[0])):
                 self.assertEqual(a.board[i, j], b.board[i, j])  # Compare each index
 
+
 if __name__ == '__main__':
     unittest.main()
 
