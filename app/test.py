@@ -1,8 +1,8 @@
 import unittest
 
-from depthFirstSearch.state import State
-from depthFirstSearch import stateFactory, state
-from neuralNetwork.convNet import one_hot_encode, decode_output
+from app.depthFirstSearch.state import State, stateFactory
+from app.depthFirstSearch import state
+from app.neuralNetwork import one_hot_encode, decode_output
 
 
 class TestState(unittest.TestCase):
