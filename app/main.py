@@ -1,3 +1,5 @@
+import random
+
 from fastapi import FastAPI, status, HTTPException
 from pydantic import BaseModel
 
@@ -10,12 +12,22 @@ app = FastAPI()
 
 algorithms = {"dfs": True,
               "cnn": ConvNet()}
+sudokus = []
 
 
 class SudokuRequest(BaseModel):
 
     algorithm: str
     sudoku: str
+
+
+@app.get("/sudoku", status_code=status.HTTP_200_OK)
+async def get_random():
+    n = len(sudokus)
+    if n == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="No sudokus uploaded")
+    return {"puzzle": sudokus[random.randint(0, n-1)]}
 
 
 @app.post("/sudoku", status_code=status.HTTP_200_OK)
@@ -47,3 +59,10 @@ async def sudoku_solver(request: SudokuRequest):
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                         detail="Algorithm not found")
+
+
+@app.put("/sudoku", status_code=status.HTTP_200_OK)
+async def add_sudoku(sudoku: str):
+    sudokus.append(sudoku)
+    with open("sudoku.csv", "a") as file:
+        file.write(sudoku)
