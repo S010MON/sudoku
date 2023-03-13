@@ -1,5 +1,4 @@
-import stateFactory
-from state import State
+from app.depthFirstSearch.state import State
 
 
 def depth_first_search(state: State) -> State:
@@ -34,8 +33,3 @@ def depth_first_search(state: State) -> State:
 
     return None
 
-
-if __name__ == "__main__":
-    state = stateFactory.generate_valid_state()
-    output = depth_first_search(state)
-    print(output)
