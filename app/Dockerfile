@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 EXPOSE 5000
 
 # Copy all of the code from the origin to the docker mounted directory
-ADD .. .
+ADD . .
 WORKDIR .
 
 # Run the server

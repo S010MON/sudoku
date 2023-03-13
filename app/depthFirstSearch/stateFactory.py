@@ -1,5 +1,5 @@
 import numpy as np
-from state import State
+from .state import State
 
 
 def generate_empty_state() -> State:

@@ -1,8 +1,11 @@
 import unittest
+import numpy as np
 
-from app.depthFirstSearch.state import State, stateFactory
 from app.depthFirstSearch import state
-from app.neuralNetwork import one_hot_encode, decode_output
+from app.depthFirstSearch import stateFactory
+from app.depthFirstSearch.state import State
+from app.neuralNetwork.convNet import one_hot_encode, decode_output
+from app.utilites import string_to_np_array, np_array_to_string
 
 
 class TestState(unittest.TestCase):
@@ -125,16 +128,19 @@ class TestState(unittest.TestCase):
 
     def test_decoding(self):
         a = stateFactory.generate_complete_state()
-        enc = one_hot_encode(a.board)   # Encoded board
-        dec = decode_output(enc)        # Decoded board
+        enc = one_hot_encode(a.board)  # Encoded board
+        dec = decode_output(enc)  # Decoded board
         b = State(dec)
         for i in range(len(a.board)):
             for j in range(len(a.board[0])):
                 self.assertEqual(a.board[i, j], b.board[i, j])  # Compare each index
 
+    def test_string_to_np_array(self):
+        string = "000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        exp = np.zeros((9, 9))
+        act = string_to_np_array(string)
+        self.assertEqual(exp.shape, act.shape)
+
 
 if __name__ == '__main__':
     unittest.main()
-
-
-

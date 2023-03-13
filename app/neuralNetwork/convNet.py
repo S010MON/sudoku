@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import tensorflow as tf
 
@@ -44,12 +46,15 @@ def create_model():
 class ConvNet:
 
     def __init__(self):
-        self.model = tf.keras.models.load_model('model_2')
+        self.model = tf.keras.models.load_model("app/neuralNetwork/model_2/")
 
     def predict(self, sudoku: np.ndarray((9, 9))) -> np.ndarray((9, 9)):
 
         if sudoku.shape != (9, 9):
             raise Exception("Sudoku shape must be (9, 9)!")
 
-        prediction = self.model.predict([one_hot_encode(sudoku)])
+        input = np.array([one_hot_encode(sudoku)])
+        assert input.shape == (1, 81, 9)
+
+        prediction = self.model.predict(input)
         return decode_output(prediction[0])
