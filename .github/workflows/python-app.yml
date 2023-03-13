@@ -12,16 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Install python
-      run: |
-            apt-get update
-            apt-get upgrade -y
-            apt-get install python3 -y
-            apt-get install pip3 -y
-            
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+                
     - name: Install requirements
       run: pip3 install -r app/requirements.txt
        
