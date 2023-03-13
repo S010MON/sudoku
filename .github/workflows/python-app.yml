@@ -20,7 +20,7 @@ jobs:
     - run: ls
                 
     - name: Install requirements
-      run: pip3 install -r /app/requirements.txt
+      run: pip3 install -r app/requirements.txt
        
     - name: Execute tests
       run: python3 test.py
