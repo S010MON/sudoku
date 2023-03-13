@@ -16,9 +16,11 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
+        
+    - run: ls
                 
     - name: Install requirements
-      run: pip3 install -r app/requirements.txt
+      run: pip3 install -r /app/requirements.txt
        
     - name: Execute tests
       run: python3 test.py
