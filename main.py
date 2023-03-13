@@ -1,5 +1,5 @@
-import stateFactory
-from state import State
+from depthFirstSearch import stateFactory
+from depthFirstSearch.state import State
 
 
 def depth_first_search(state: State) -> State:

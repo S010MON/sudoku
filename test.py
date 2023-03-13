@@ -1,11 +1,9 @@
 import unittest
 
-import numpy as np
+from depthFirstSearch.state import State
+from depthFirstSearch import stateFactory, state
+from neuralNetwork.convNet import one_hot_encode, decode_output
 
-import state
-from state import State
-import stateFactory
-import nn_utils
 
 class TestState(unittest.TestCase):
 
@@ -127,8 +125,8 @@ class TestState(unittest.TestCase):
 
     def test_decoding(self):
         a = stateFactory.generate_complete_state()
-        enc = nn_utils.one_hot_encode(a.board)  # Encoded board
-        dec = nn_utils.decode_output(enc)  # Decoded board
+        enc = one_hot_encode(a.board)   # Encoded board
+        dec = decode_output(enc)        # Decoded board
         b = State(dec)
         for i in range(len(a.board)):
             for j in range(len(a.board[0])):
