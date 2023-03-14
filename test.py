@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 
-from app.depthFirstSearch import state
-from app.depthFirstSearch import stateFactory
+from app.depthFirstSearch.depthFirstSearch import depth_first_search
+from app.depthFirstSearch import stateFactory, state
 from app.depthFirstSearch.state import State
 from app.neuralNetwork.convNet import one_hot_encode, decode_output
 from app.utilites import string_to_np_array, np_array_to_string
@@ -140,6 +140,7 @@ class TestState(unittest.TestCase):
         exp = np.zeros((9, 9))
         act = string_to_np_array(string)
         self.assertEqual(exp.shape, act.shape)
+
 
 
 if __name__ == '__main__':
