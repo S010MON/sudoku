@@ -12,6 +12,28 @@ class State:
                           7: (0, 6), 8: (3, 6), 9: (6, 6)}
         self.boxes = len(self.box_coord)
 
+    def set_state(self, string: str) -> None:
+        i, j = 0, 0
+
+        if len(string) != 81:
+            raise Exception("String must contain 81 chars of [0, 9]")
+
+        for char in string:
+
+            value = int(char)
+            if value < 0 or value > 9:
+                raise ValueError("All values must be in the range [0, 9]")
+
+            self.board[i][j] = value
+            i = i + 1
+            j = j + 1
+
+            if j == 9:
+                j = 0
+            if i == 9:
+                i = 0
+
+
     def is_legal(self) -> bool:
         for row in range(self.rows):
             if not self.check_row(row):
