@@ -46,7 +46,7 @@ def create_model():
 class ConvNet:
 
     def __init__(self):
-        self.model = tf.keras.models.load_model("app/neuralNetwork/model_2/")
+        self.model = tf.keras.models.load_model("app/cnn/model_2/")
 
     def predict(self, sudoku: np.ndarray((9, 9))) -> np.ndarray((9, 9)):
 
