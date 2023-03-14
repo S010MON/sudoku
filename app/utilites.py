@@ -14,6 +14,6 @@ def np_array_to_string(A: np.ndarray) -> str:
     shape = A.shape
     for i in range(shape[0]):
         for j in range(shape[1]):
-            s = s + str(A[i][j])
+            s = s + str(int(A[i][j]))
 
     return s

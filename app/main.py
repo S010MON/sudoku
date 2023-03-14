@@ -67,16 +67,14 @@ async def sudoku_solver(request: SudokuRequest):
         solution = algorithms["cnn"].predict(query)
         solution_state = State(solution)
         response = {"algorithm": algo,
-                    "solution": np_array_to_string(solution),
-                    "pretty_print": str(solution_state) }
+                    "solution": np_array_to_string(solution)}
         return response
 
     elif algo == "dfs":
         state = State(query)
         solution = depth_first_search(state).board
         response = {"algorithm": algo,
-                    "solution": np_array_to_string(solution),
-                    "pretty_print": str(state)}
+                    "solution": np_array_to_string(solution)}
         return response
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
