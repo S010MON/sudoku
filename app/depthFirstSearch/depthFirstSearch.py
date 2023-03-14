@@ -1,6 +1,5 @@
 import numpy as np
 
-from app.depthFirstSearch import stateFactory
 from app.depthFirstSearch.state import State
 
 
@@ -39,12 +38,3 @@ def depth_first_search(state: State) -> State:
                 return result
 
     return None
-
-if __name__ == "__main__":
-    state = stateFactory.generate_complete_state()
-    state.set(0, 3, 0)
-    state.set(5, 5, 0)
-    state.set(0, 0, 0)
-    state.set(6, 4, 0)
-
-    print(depth_first_search(state))
