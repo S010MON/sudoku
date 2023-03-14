@@ -1,6 +1,6 @@
 import numpy as np
 
-from app.depthFirstSearch.state import State
+from app.dfs.state import State
 
 
 def select_next_move(board: np.ndarray):

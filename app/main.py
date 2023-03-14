@@ -4,9 +4,9 @@ from pydantic import BaseModel
 from typing import List
 
 import random
-from neuralNetwork.convNet import ConvNet
-from depthFirstSearch.depthFirstSearch import depth_first_search
-from depthFirstSearch.state import State
+from cnn.convNet import ConvNet
+from dfs.depthFirstSearch import depth_first_search
+from dfs.state import State
 from .utilites import string_to_np_array, np_array_to_string
 
 
