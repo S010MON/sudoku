@@ -4,7 +4,7 @@ import numpy as np
 from app.dfs.depthFirstSearch import depth_first_search
 from app.dfs import stateFactory, state
 from app.dfs.state import State
-from app.cnn.convNet import one_hot_encode, decode_output
+from app.cnn.convNet import one_hot_encode, decode_output, single_best_move
 from app.utilites import string_to_np_array, np_array_to_string
 
 
@@ -141,6 +141,10 @@ class TestState(unittest.TestCase):
         act = string_to_np_array(string)
         self.assertEqual(exp.shape, act.shape)
 
+    def test_single_best_move(self):
+        sudoku = stateFactory.generate_valid_state()
+        print(sudoku)
+        print(single_best_move(sudoku.board))
 
 
 if __name__ == '__main__':

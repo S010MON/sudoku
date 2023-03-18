@@ -21,6 +21,22 @@ def get_max_index(arr):
     return max_indices
 
 
+def single_best_move(sud: np.ndarray((9, 9))) -> np.ndarray((9, 9)):
+    empty_fields = np.where(np.reshape(sud, 81) == 0)  # possible indices to fill
+    nn = ConvNet()
+    solved = nn.predict_encoded(sud)
+    solved_max = np.max(solved, axis=1)
+    target_values = [solved_max[i] for i in empty_fields]
+    print(target_values)
+    max_value_index = np.argmax(target_values)
+    print(empty_fields)
+    max_index = empty_fields[:, max_value_index]  # Gets the index (1d) of the most likely value
+    print("max index", max_index)
+    decoded = decode_output(solved)
+    sud[np.floor(max_index / 9), max_index % 9] = decoded[np.floor(max_index / 9), max_index % 9]
+    return sud
+
+
 def create_model():
     """
     Create model of the Neural Network based on this paper:
@@ -58,3 +74,14 @@ class ConvNet:
 
         prediction = self.model.predict(input)
         return decode_output(prediction[0])
+
+    def predict_encoded(self, sudoku: np.ndarray((9, 9))) -> np.ndarray((81, 9)):
+        if sudoku.shape != (9, 9):
+            raise Exception("Sudoku shape must be (9, 9)!")
+
+        input = np.array([one_hot_encode(sudoku)])
+        assert input.shape == (1, 81, 9)
+
+        prediction = self.model.predict(input)
+        return prediction[0]
+
