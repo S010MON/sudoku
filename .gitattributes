@@ -1,1 +1,2 @@
 *.csv linguist-language=Python3
+/app/cnn/model_2/* linguist-language=Python3
