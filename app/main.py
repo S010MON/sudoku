@@ -4,6 +4,9 @@ from pydantic import BaseModel
 from typing import List
 
 import random
+
+from starlette.middleware.cors import CORSMiddleware
+
 from cnn.convNet import ConvNet
 from dfs.depthFirstSearch import depth_first_search
 from dfs.state import State
@@ -28,6 +31,14 @@ sudoku = {}
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup_event():
