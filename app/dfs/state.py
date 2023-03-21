@@ -60,8 +60,8 @@ class State:
         sq = self.box_coord[square]
         row_start = sq[0]
         col_start = sq[1]
-        for row in range(row_start, row_start + 2):
-            for col in range(col_start, col_start + 2):
+        for row in range(row_start, row_start + 3):
+            for col in range(col_start, col_start + 3):
                 if self.board[row][col] != 0:
                     lst.append(self.board[row][col])
         return not has_duplicate(lst)

@@ -80,7 +80,9 @@ class TestState(unittest.TestCase):
 
     def test_valid_box_neg(self):
         b = stateFactory.generate_invalid_box_state()
+        print(b)
         for i in range(1, 9):
+            print(i)
             self.assertFalse(b.check_box(i))
 
     def test_is_legal_empty(self):
