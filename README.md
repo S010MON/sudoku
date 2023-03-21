@@ -11,7 +11,7 @@ A CNN of 16 hidden layers was trained to predict the output of the sudoku in one
 **Neural Net Data** available from: https://www.kaggle.com/datasets/bryanpark/sudoku?resource=download
 
 ### 3. Web Application
-Try out the algorithms at https://leondebnath.com/sudoku.html
+Try out the algorithms at https://sudoku.leondebnath.com/
 
 ![web_app.png](https://github.com/S010MON/sudoku/blob/master/web_app.png)
 
