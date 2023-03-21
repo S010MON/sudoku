@@ -1,12 +1,10 @@
-from contextlib import asynccontextmanager
 from fastapi import FastAPI, status, HTTPException
+from fastapi.responses import RedirectResponse
+from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 
 import random
-
-from starlette.middleware.cors import CORSMiddleware
-
 from cnn.convNet import ConvNet
 from dfs.depthFirstSearch import depth_first_search
 from dfs.state import State
@@ -50,6 +48,11 @@ async def startup_event():
         for line in data:
             parts = line.split(",")
             sudoku[parts[0]] = parts[1]
+
+
+@app.get("/")
+async def root():
+    return RedirectResponse("https://leondebnath.com/sudoku.html")
 
 
 @app.get("/sudoku", status_code=status.HTTP_200_OK)
